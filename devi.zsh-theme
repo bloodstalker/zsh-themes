@@ -24,6 +24,7 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     purple="%F{135}"
     hotpink="%F{161}"
     limegreen="%F{118}"
+    lorange="%F{222}"
 else
     turquoise="$fg[cyan]"
     orange="$fg[yellow]"
@@ -101,4 +102,4 @@ function battery_charge {
     wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}'
 }
 
-RPROMPT='%{$turquoise%}$(battery_charge)%%%{$reset_color%}'
+RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$turquoise%}$(battery_charge)%%%{$reset_color%}'
