@@ -28,6 +28,9 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     batyellow="%F{226}"
     batgreen="%F{76}"
     batred="%F{88}"
+    purblue="%F{69}"
+    swampgreen="%F{64}"
+    limblue="%F{154}"
 else
     turquoise="$fg[cyan]"
     orange="$fg[yellow]"
@@ -100,7 +103,7 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
-PROMPT=$'%{$purple%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$fg_bold[red]%} -%{$fg_bold[red]%}-%{$fg_bold[red]%}➜%"%{$reset_color%}%" '
+PROMPT=$'%{$swampgreen%}%n%{$reset_color%} at %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%} -%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
 
 function battery_charge {
     batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
@@ -115,6 +118,7 @@ function battery_charge {
         batcolor=$batred
     fi
 }
+add-zsh-hook precmd battery_charge
 
 function batcharge_printer {
     $battery_charge
