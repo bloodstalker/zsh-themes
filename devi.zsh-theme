@@ -25,12 +25,18 @@ if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     hotpink="%F{161}"
     limegreen="%F{118}"
     lorange="%F{222}"
+    batyellow="%F{226}"
+    batgreen="%F{76}"
+    batred="%F{88}"
 else
     turquoise="$fg[cyan]"
     orange="$fg[yellow]"
     purple="$fg[magenta]"
     hotpink="$fg[red]"
     limegreen="$fg[green]"
+    batyellow="%fg[yellow]"
+    batgreen="%fg[green]"
+    batred="%fg[red]"
 fi
 
 # enable VCS systems you use
@@ -96,10 +102,23 @@ add-zsh-hook precmd steeef_precmd
 
 PROMPT=$'%{$purple%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$fg_bold[red]%} -%{$fg_bold[red]%}-%{$fg_bold[red]%}➜%"%{$reset_color%}%" '
 
-BATTERY_CHARGE="wmic path win32_battery get estimatedchargeremaining"
-
 function battery_charge {
-    wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}'
+    batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
+    batgood=66
+    batbad=33
+
+    if [[ $batcharge > $batgood || $batcharge = $batgood ]]; then
+        batcolor=$batgreen
+    elif [[ $batcharge < $batgood && $batcharge > $batbad || $batcharge == $batbad ]]; then
+        batcolor=$batyellow
+    else
+        batcolor=$batred
+    fi
 }
 
-RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$turquoise%}$(battery_charge)%%%{$reset_color%}'
+function batcharge_printer {
+    $battery_charge
+    echo $batcharge
+}
+
+RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$batcolor%}$(batcharge_printer)%%%{$reset_color%}'
