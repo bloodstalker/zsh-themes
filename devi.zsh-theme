@@ -106,7 +106,7 @@ add-zsh-hook precmd steeef_precmd
 PROMPT=$'%{$swampgreen%}%n%{$reset_color%} at %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%} -%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
 
 function battery_charge {
-    upower -e 2> /dev/null
+    upower -e > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
         batpath=$(upower -e | grep BAT0)
