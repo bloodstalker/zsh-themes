@@ -111,10 +111,10 @@ function battery_charge {
     if [ $? -eq 0 ]; then
         batpath=$(upower -e | grep BAT0)
         batcharge=$(upower -i $batpath | grep percentage | gawk '{print $2}')
-        os="nix"
+        RSTCLR="%%%{$reset_color%}"
     else
         batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
-        os="win"
+        RSTCLR="%%{$reset_color%}"
     fi    
     
     batgood=66
@@ -135,8 +135,4 @@ function batcharge_printer {
     echo $batcharge
 }
 
-if [ $os="win" ]; then
-    RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$batcolor%}$(batcharge_printer)%%%{$reset_color%}'
-else
-    RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$batcolor%}$(batcharge_printer)%%{$reset_color%}'
-fi
+RPROMPT='%{$lorange%}%?%{$reset_color%}  %{$batcolor%}$(batcharge_printer)%%%{$reset_color%}'
