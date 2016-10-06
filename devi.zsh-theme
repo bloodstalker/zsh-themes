@@ -106,7 +106,15 @@ add-zsh-hook precmd steeef_precmd
 PROMPT=$'%{$swampgreen%}%n%{$reset_color%} at %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%} -%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
 
 function battery_charge {
-    batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
+    upower -e 2> /dev/null
+
+    if [ $? -eq 0 ]; then
+        batpath=$(upower -e | grep BAT0)
+        batcharge=$(upower -i $batpath | grep percentage | gawk '{print $2}')
+    else
+        batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
+    fi    
+    
     batgood=66
     batbad=33
 
