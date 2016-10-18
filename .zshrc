@@ -50,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn)
+plugins=(git svn zsh-syntax-highlighting)
 
 # User configuration
 
@@ -97,9 +97,12 @@ alias killhunter="taskkill -f -im relichunterszero.exe"
 alias foad="/d/home/apps/scripts/foad.bat"
 alias mutator="cd /d/home/devi/mutator"
 alias remotejob="cd /d/home/devi/remote-job"
-alias doom="open /d/home/devi/games/Brutal\ Doom\ -\ Hell\ on\ Earth\ Starter\ Pack/gzdoom\ -\ PLAY\ BRUTAL\ DOOM.exe"
 alias kill="taskkill"
 alias la="ls -a"
 alias zshthemes="cd /d/home/devi/zsh-themes"
 alias updatetheme="cp /d/home/devi/zsh-themes/devi.zsh-theme /cygdrive/d/home/apps/.babun/cygwin/home/bloodstalker/.oh-my-zsh/themes/devi.zsh-theme"
 alias updaterc="cp /d/home/devi/zsh-themes/.zshrc /d/home/apps/.babun/cygwin/home/bloodstalker/.zshrc"
+alias ecpapyrus="run /d/home/devi/eclipse/papyrus/papyrus/papyrus.exe"
+alias eclipse="run /d/home/devi/eclipse/eclipse-everything/eclipse.exe"
+alias doomsod="run /d/home/devi/games/doom/gzdoom.exe -file SODfinal.WAD -nomusic -savedir /home/devi/games/doom/sod"
+alias doompl2="run /d/home/devi/games/doom/gzdoom.exe -file PL2.WAD -nomusic -savedir /home/devi/games/doom/pl2"
