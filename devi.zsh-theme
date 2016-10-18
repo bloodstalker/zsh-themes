@@ -103,7 +103,11 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
-PROMPT=$'%{$swampgreen%}%n%{$reset_color%} at %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%} -%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
+function time_function {
+    date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
+}
+
+PROMPT=$'%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%} at %{$batyellow%}$(time_function)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%}\n-%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
 
 function battery_charge {
     upower -e > /dev/null 2>&1
@@ -115,15 +119,18 @@ function battery_charge {
         batcharge=$(wmic path win32_battery get estimatedchargeremaining | gawk 'BEGIN{RS="  \n"}{print$3}')
     fi    
     
+    batfull=100
     batgood=66
     batbad=33
 
-    if [[ $batcharge > $batgood || $batcharge = $batgood ]]; then
+    if [[ $batcharge > $batgood || $batcharge = $batgood || $batcharge = $batfull ]]; then
         batcolor=$batgreen
     elif [[ $batcharge < $batgood && $batcharge > $batbad || $batcharge == $batbad ]]; then
         batcolor=$batyellow
-    else
+    elif [[ $batcharge < $batbad ]]; then
         batcolor=$batred
+    else
+        batcolor=$purple
     fi
 }
 add-zsh-hook precmd battery_charge
