@@ -106,3 +106,33 @@ alias ecpapyrus="run /d/home/devi/eclipse/papyrus/papyrus/papyrus.exe"
 alias eclipse="run /d/home/devi/eclipse/eclipse-everything/eclipse.exe"
 alias doomsod="run /d/home/devi/games/doom/gzdoom.exe -file SODfinal.WAD -nomusic -savedir /home/devi/games/doom/sod"
 alias doompl2="run /d/home/devi/games/doom/gzdoom.exe -file PL2.WAD -nomusic -savedir /home/devi/games/doom/pl2"
+alias devibox="cd /d/home/devi"
+alias killholes="rm -rf /d/home/devi/abbatoir/zthepit/*"
+
+function digahole {
+	globalholecounter=1
+	if test "$(ls -A "/d/home/devi/abbatoir/zthepit")"; then		
+		while [ 1 ]; do
+			if [ -d "/d/home/devi/abbatoir/zthepit/hole$globalholecounter" ]; then
+				((globalholecounter++))
+			else
+				break;
+			fi
+		done
+
+		((globalholecounter--))
+
+		if [ -d "/d/home/devi/abbatoir/zthepit/hole$globalholecounter" ]; then
+			if test "$(ls -A "/d/home/devi/abbatoir/zthepit/hole$globalholecounter")"; then
+				((globalholecounter++))
+				mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
+				cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter
+			else
+				cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter	
+			fi
+    	fi
+	else
+		mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
+		cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter
+	fi
+}
