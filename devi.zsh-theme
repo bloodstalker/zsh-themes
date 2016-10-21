@@ -103,8 +103,24 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
+function guess_who {
+    upower -e > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        os="lin"
+    else
+        os="win"
+    fi
+}
+add-zsh-hook precmd guess_who
+
 function time_function {
-    date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
+    $guess_who
+    if [ os="win" ]; then
+        date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
+    else
+        date | gawk '{print $4}'
+    fi
 }
 
 PROMPT=$'%{$swampgreen%}%n%{$reset_color%} on %{$purblue%}%m%{$reset_color%} in %{$limegreen%}%~%{$reset_color%} at %{$batyellow%}$(time_function)%{$reset_color%}$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$limblue%}\n-%{$limblue%}-%{$limblue%}➜%"%{$reset_color%}%" '
