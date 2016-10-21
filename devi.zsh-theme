@@ -116,7 +116,7 @@ add-zsh-hook precmd guess_who
 
 function time_function {
     $guess_who
-    if [ os="win" ]; then
+    if [[ "$os" = "win" ]]; then
         date | gawk 'BEGIN{RS=","}END{print $2" "$3}'
     else
         date | gawk '{print $4}'
