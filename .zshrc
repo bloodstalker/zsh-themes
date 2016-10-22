@@ -108,6 +108,8 @@ alias doomsod="run /d/home/devi/games/doom/gzdoom.exe -file SODfinal.WAD -nomusi
 alias doompl2="run /d/home/devi/games/doom/gzdoom.exe -file PL2.WAD -nomusic -savedir /home/devi/games/doom/pl2"
 alias devibox="cd /d/home/devi"
 alias killholes="rm -rf /d/home/devi/abbatoir/zthepit/*"
+alias ck4="run /d/home/apps/DOSBox-0.74/DOSBox.exe -userconf"
+alias deluge="run /c/progra~2/deluge/deluge.exe"
 
 function digahole {
 	globalholecounter=1
