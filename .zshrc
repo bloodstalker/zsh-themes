@@ -50,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn zsh-syntax-highlighting)
+plugins=(git svn zsh-syntax-highlighting autojump)
 
 # User configuration
 
@@ -75,6 +75,10 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+#auto-jump
+[[ -s /home/bloodstalker/.autojump/etc/profile.d/autojump.sh ]] && source /home/bloodstalker/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -98,7 +102,7 @@ alias foad="/d/home/apps/scripts/foad.bat"
 alias mutator="cd /d/home/devi/mutator"
 alias remotejob="cd /d/home/devi/remote-job"
 alias kill="taskkill"
-alias la="ls -a"
+alias la="ls -A"
 alias zshthemes="cd /d/home/devi/zsh-themes"
 alias updatetheme="cp /d/home/devi/zsh-themes/devi.zsh-theme /cygdrive/d/home/apps/.babun/cygwin/home/bloodstalker/.oh-my-zsh/themes/devi.zsh-theme"
 alias updaterc="cp /d/home/devi/zsh-themes/.zshrc /d/home/apps/.babun/cygwin/home/bloodstalker/.zshrc"
@@ -110,6 +114,18 @@ alias devibox="cd /d/home/devi"
 alias killholes="rm -rf /d/home/devi/abbatoir/zthepit/*"
 alias ck4="run /d/home/apps/DOSBox-0.74/DOSBox.exe -userconf"
 alias deluge="run /c/progra~2/deluge/deluge.exe"
+alias ee="explorer ."
+alias docs="cd /d/home/devi/docs"
+
+function fixrc {
+	cp /d/home/devi/zsh-themes/.zshrc /d/home/apps/.babun/cygwin/home/bloodstalker/.zshrc
+	source ~/.zshrc	
+}
+
+function fixtheme {
+	cp /d/home/devi/zsh-themes/devi.zsh-theme /cygdrive/d/home/apps/.babun/cygwin/home/bloodstalker/.oh-my-zsh/themes/devi.zsh-theme
+	source ~/.zshrc
+}
 
 function digahole {
 	globalholecounter=1
