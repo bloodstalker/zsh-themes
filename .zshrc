@@ -116,6 +116,8 @@ alias ck4="run /d/home/apps/DOSBox-0.74/DOSBox.exe -userconf"
 alias deluge="run /c/progra~2/deluge/deluge.exe"
 alias ee="explorer ."
 alias docs="cd /d/home/devi/docs"
+alias ccminer="run /d/home/devi/CCMiner-Win64/ccminer --algo=zr5 --devices=gtx960m --url=stratum+tcp://ziftrpool.io:3032 --userpass=ZSNT3gMaDaAL9Lj1SnULqxLC8LG6EqP5yw:anything"
+alias minerd="run /d/home/devi/CPU-Miner-Win64/minerd --algo=ziftr --url=stratum+tcp://ziftrpool.io:3032 --userpass=ZSNT3gMaDaAL9Lj1SnULqxLC8LG6EqP5yw:anything --threads=1"
 
 function fixrc {
 	cp /d/home/devi/zsh-themes/.zshrc /d/home/apps/.babun/cygwin/home/bloodstalker/.zshrc
@@ -138,7 +140,9 @@ function digahole {
 			fi
 		done
 
-		((globalholecounter--))
+		if [ ! $globalholecounter=1 ]; then
+			((globalholecounter--))
+		fi
 
 		if [ -d "/d/home/devi/abbatoir/zthepit/hole$globalholecounter" ]; then
 			if test "$(ls -A "/d/home/devi/abbatoir/zthepit/hole$globalholecounter")"; then
@@ -148,6 +152,9 @@ function digahole {
 			else
 				cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter	
 			fi
+		else
+			mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
+			cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter
     	fi
 	else
 		mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
