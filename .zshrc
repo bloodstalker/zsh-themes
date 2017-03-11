@@ -143,9 +143,7 @@ function digahole {
 			fi
 		done
 
-		if [ ! $globalholecounter=1 ]; then
-			((globalholecounter--))
-		fi
+		((globalholecounter--))
 
 		if [ -d "/d/home/devi/abbatoir/zthepit/hole$globalholecounter" ]; then
 			if test "$(ls -A "/d/home/devi/abbatoir/zthepit/hole$globalholecounter")"; then
@@ -155,9 +153,6 @@ function digahole {
 			else
 				cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter	
 			fi
-		else
-			mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
-			cd /d/home/devi/abbatoir/zthepit/hole$globalholecounter
     	fi
 	else
 		mkdir /d/home/devi/abbatoir/zthepit/hole$globalholecounter
